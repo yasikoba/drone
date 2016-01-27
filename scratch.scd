@@ -27,9 +27,9 @@ r = Synth('drone', ["pan", 1]);
 ~array = ~array.rotate(1);
 ~array = ~array.scramble;
 
-~freqs_l = [~array.at(0),~array.at(1),~array.at(2),~array.at(3)];
-~freqs_r = [~array.at(0)*1.01,~array.at(1)*1.01,~array.at(2)*1.01,~array.at(3)*1.01];
-~freqs_r = [~array.at(0)*1.02,~array.at(1)*1.02,~array.at(2)*1.02,~array.at(3)*1.02];
+~freqs_l = ~array.keep(4);
+~freqs_r = ~freqs_l * 1.01;
+~freqs_r = ~freqs_l * 1.02;
 ~freqs_r = ~freqs_l
 l.setn(\freqs, ~freqs_l);
 r.setn(\freqs, ~freqs_r);
@@ -47,8 +47,8 @@ r = Synth('drone', ["pan", 1]);
 
 t = Task({
 	2.do({
-		~freqs_l = [~array.at(0),~array.at(1),~array.at(2),~array.at(3)];
-		~freqs_r = [~array.at(0)*1.01,~array.at(1)*1.01,~array.at(2)*1.01,~array.at(3)*1.01];
+		~freqs_l = ~array.keep(4);
+		~freqs_r = ~freqs_l * 1.01;
 		l.setn(\freqs, ~freqs_l);
 		~freqs_l.postln;
 		10.wait;
